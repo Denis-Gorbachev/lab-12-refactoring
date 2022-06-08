@@ -1,5 +1,6 @@
-#ifndef INCLUDE_PAGECONTAINER_HPP
-#define INCLUDE_PAGECONTAINER_HPP
+// Copyright 2022 Denis Gorbachev <denis.gorbachev2002@yandex.ru>
+#ifndef INCLUDE_PAGECONTAINER_HPP_
+#define INCLUDE_PAGECONTAINER_HPP_
 
 #include <iostream>
 #include <string>
@@ -38,4 +39,4 @@ class PageContainer {
   std::vector<std::string> raw_data_;
 };
 
-#endif  // INCLUDE_PAGECONTAINER_HPP
+#endif  // INCLUDE_PAGECONTAINER_HPP_
