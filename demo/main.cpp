@@ -1,24 +1,49 @@
-#include <example.hpp>
+#include "PageContainer.hpp"
+#include <boost/program_options.hpp>
+namespace opt = boost::program_options;
 
-#include <string>
+struct CmdArgs {
+  std::string input;
+  float threshold = 0;
+};
+
+bool parse_cmd(int argc, char* argv[], CmdArgs& args) {
+  // Add options
+  opt::options_description desc("Allowed options");
+  desc.add_options()("help, h", "produce help message")
+      ("input",opt::value<std::string>(&args.input)
+          ->default_value("../tests/InputExample.txt"),
+      "path/to/input/file")
+      ("threshold", opt::value<float>(&args.threshold)
+          ->default_value(0.1),
+      "threshold value");
+
+  // Parse arguments
+  opt::variables_map vm;
+  opt::store(opt::parse_command_line(argc, argv, desc), vm);
+  opt::notify(vm);
+
+  if (vm.count("help")) {
+    std::cout << "Usage: demo [options]" << std::endl;
+    std::cout << desc << std::endl;
+    return false;
+  }
+  return true;
+}
 
 int main(int argc, char* argv[]) {
-  Log the_log(0);
-  UsedMemory used_memory(the_log);
+  CmdArgs args;
+  if (!parse_cmd(argc, argv, args)) return 0;
 
-  std::string filename = "data.txt";
-  for (int i = 1; i < argc; ++i) {
-    if (std::string(argv[i]) == "input") {
-      filename = argv[i + 1];
-    }
-  }
+  auto* used_memory = new UsedMemory;
+  auto* sender = new StatSender;
+  PageContainer page(sender, used_memory);
 
-  float threshold = 0.1;
-  PageContainer page(the_log, &used_memory);
-  std::ifstream in(filename);
-  page.Load(in, threshold);
+  std::ifstream f_in(args.input);
+  page.Load(f_in, args.threshold);
+  f_in.close();
 
-  the_log.Write(std::to_string(used_memory.used()));
+  Log::getInstance().Write(std::to_string(used_memory->used()));
 
   for (size_t i = 0; i < 5; ++i) {
     const auto& item = page.ByIndex(i);
@@ -26,9 +51,7 @@ int main(int argc, char* argv[]) {
     const auto& item2 = page.ById(std::to_string(i));
     std::cout << item2.name << ": " << item2.score << std::endl;
   }
-
-  page.Reload(threshold);
-  the_log.Write(std::to_string(used_memory.used()));
-
+  page.Reload(args.threshold);
+  Log::getInstance().Write(std::to_string(used_memory->used()));
   return 0;
 }

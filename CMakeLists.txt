@@ -28,13 +28,25 @@ string(APPEND CMAKE_CXX_FLAGS " -Wshadow -Wnon-virtual-dtor")
 
 # new versions of cmake contain gtest search files
 # commented out to increase the build speed.
-# hunter_add_package(GTest)
+hunter_add_package(GTest)
 find_package(GTest CONFIG REQUIRED)
+
+hunter_add_package(Boost COMPONENTS program_options)
+find_package(Boost CONFIG REQUIRED program_options)
 
 add_library(${PROJECT_NAME} STATIC
   # enum your files and delete this comment
-  ${CMAKE_CURRENT_SOURCE_DIR}/sources/example.cpp
-)
+        sources/PageContainer.cpp
+        sources/Log.cpp
+        sources/UsedMemory.cpp
+        sources/StatSender.cpp
+        include/UsedMemory.hpp
+        include/Log.hpp
+        include/StatSender.hpp
+        include/PageContainer.hpp
+        include/Subscribers.hpp
+        include/Histogram.hpp
+        sources/Histogram.cpp)
 
 add_executable(demo
   ${CMAKE_CURRENT_SOURCE_DIR}/demo/main.cpp
@@ -46,13 +58,15 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 
 target_link_libraries(demo ${PROJECT_NAME})
+target_link_libraries(${PROJECT_NAME}
+        Boost::program_options)
 
 if(BUILD_TESTS)
   add_executable(tests
     # TODO: enum your files and delete this comment
-    ${CMAKE_CURRENT_SOURCE_DIR}/tests/example.cpp
+          ${CMAKE_CURRENT_SOURCE_DIR}/tests/tests.cpp
   )
-  target_link_libraries(tests ${PROJECT_NAME} GTest::gtest_main)
+  target_link_libraries(tests ${PROJECT_NAME} GTest::gtest_main GTest::gmock_main)
   enable_testing()
   add_test(NAME unit_tests COMMAND tests)
 endif()
