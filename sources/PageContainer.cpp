@@ -1,3 +1,4 @@
+// Copyright 2022 Denis Gorbachev <denis.gorbachev2002@yandex.ru>
 #include <algorithm>
 #include <iostream>
 #include <set>
@@ -64,7 +65,6 @@ void PageContainer::Reload(float threshold) {
 }
 
 void PageContainer::LoadRawData(std::istream& io) {
-
   std::vector<std::string> raw_data;
 
   if (!io) throw std::runtime_error("Can't open file.");

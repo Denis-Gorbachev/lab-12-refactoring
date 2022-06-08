@@ -1,11 +1,14 @@
-#ifndef TEMPLATE_HISTOGRAM_HPP
-#define TEMPLATE_HISTOGRAM_HPP
+// Copyright 2022 Denis Gorbachev <denis.gorbachev2002@yandex.ru>
+#ifndef INCLUDE_HISTOGRAM_HPP_
+#define INCLUDE_HISTOGRAM_HPP_
 #include "Subscribers.hpp"
 #include "Log.hpp"
+#include <string>
+#include <vector>
 
 class Histogram: public Subscribers {
  public:
-  Histogram(): _avg_score(0), _discarded(0) {};
+  Histogram(): _avg_score(0), _discarded(0) {}
   ~Histogram() override = default;
   void OnDataLoaded(const std::vector<Item> &,
                   const std::vector<Item> &new_items) override;
@@ -18,4 +21,4 @@ class Histogram: public Subscribers {
   float _avg_score;
   size_t _discarded;
 };
-#endif  // TEMPLATE_HISTOGRAM_HPP
+#endif  // INCLUDE_HISTOGRAM_HPP_

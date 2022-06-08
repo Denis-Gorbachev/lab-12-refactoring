@@ -1,5 +1,6 @@
-#ifndef INCLUDE_USEDMEMORY_HPP
-#define INCLUDE_USEDMEMORY_HPP
+// Copyright 2022 Denis Gorbachev <denis.gorbachev2002@yandex.ru>
+#ifndef INCLUDE_USEDMEMORY_HPP_
+#define INCLUDE_USEDMEMORY_HPP_
 
 #include <iostream>
 #include <string>
@@ -24,4 +25,4 @@ class UsedMemory: public Subscribers {
   size_t used_ = 0;
 };
 
-#endif  // INCLUDE_USEDMEMORY_HPP
+#endif  // INCLUDE_USEDMEMORY_HPP_

@@ -1,5 +1,6 @@
-#ifndef INCLUDE_LOG_HPP
-#define INCLUDE_LOG_HPP
+// Copyright 2022 Denis Gorbachev <denis.gorbachev2002@yandex.ru>
+#ifndef INCLUDE_LOG_HPP_
+#define INCLUDE_LOG_HPP_
 
 #include <iostream>
 #include <string>
@@ -22,4 +23,4 @@ class Log {
   size_t level_ = 0;
   mutable std::ostream* out_;
 };
-#endif  // INCLUDE_LOG_HPP
+#endif  // INCLUDE_LOG_HPP_

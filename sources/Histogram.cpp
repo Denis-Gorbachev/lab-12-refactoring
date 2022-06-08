@@ -1,4 +1,4 @@
-
+// Copyright 2022 Denis Gorbachev <denis.gorbachev2002@yandex.ru>
 #include "PageContainer.hpp"
 
 void Histogram::OnDataLoaded(const std::vector<Item> &,

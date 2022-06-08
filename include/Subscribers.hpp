@@ -1,5 +1,6 @@
-#ifndef INCLUDE_SUBSCRIBERS_HPP
-#define INCLUDE_SUBSCRIBERS_HPP
+// Copyright 2022 Denis Gorbachev <denis.gorbachev2002@yandex.ru>
+#ifndef INCLUDE_SUBSCRIBERS_HPP_
+#define INCLUDE_SUBSCRIBERS_HPP_
 #include <string>
 #include <vector>
 
@@ -19,4 +20,4 @@ class Subscribers {
                      const std::vector<std::string>& new_items) = 0;
   virtual void Skip(const Item& item) = 0;
 };
-#endif  // INCLUDE_SUBSCRIBERS_HPP
+#endif  // INCLUDE_SUBSCRIBERS_HPP_
