@@ -4,8 +4,6 @@
 #include <StatSender.hpp>
 #include <Log.hpp>
 
-constexpr size_t kMinLines = 10;
-
 void StatSender::OnDataLoaded(const std::vector<Item>&,
                             const std::vector<Item>& new_items) {
   Log::getInstance().WriteDebug("StatSender::OnDataLoad");

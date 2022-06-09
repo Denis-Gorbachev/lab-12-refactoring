@@ -3,7 +3,6 @@
 #include <iostream>
 #include <UsedMemory.hpp>
 
-constexpr size_t kMinLines = 10;
 UsedMemory::UsedMemory() : used_(0) {}
 
 void UsedMemory::OnDataLoaded(const std::vector<Item>& old_items,
